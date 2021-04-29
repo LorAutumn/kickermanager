@@ -9,11 +9,11 @@ function NewMatchComponent() {
     const setGameMode = stateContext.setGameMode
     const matchPlayers = stateContext.matchPlayers
     const setMatchPlayers = stateContext.setMatchPlayers
+    const matchDate = stateContext.matchDate
+    const setMatchDate = stateContext.setMatchDate
 
     const updatePlayer = e => {
         const { name, value } = e.target
-        console.log(e.target.name)
-        console.log('n', name)
         setMatchPlayers(prevState => [
             {
                 ...prevState[0],
@@ -23,7 +23,6 @@ function NewMatchComponent() {
     }
 
     console.log(matchPlayers)
-    console.log()
 
     return (
         <div className='new-match-wrapper'>
@@ -32,7 +31,10 @@ function NewMatchComponent() {
                 <div className='encounter'>
                     <h2>Encounter:</h2>
                     <label>date:</label>
-                    <input type='date' />
+                    <input
+                        type='date'
+                        onChange={e => setMatchDate(e.target.value)}
+                    />
                     <label>location:</label>
                     <input type='text' />
                 </div>
