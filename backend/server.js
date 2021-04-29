@@ -13,12 +13,12 @@ const db = mysql.createConnection({
     database: 'kickermanager',
 })
 
-app.post('/create', (req, res) => {
-    const name = req.body.author
-    const location = req.body.title
+app.post('/addPlayer', (req, res) => {
+    const name = req.body.name
+    const location = req.body.location
     db.query(
         'INSERT INTO players (name, location) VALUES (?, ?)',
-        [name, loation],
+        [name, location],
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -40,8 +40,8 @@ app.post('/upload', (req, res) => {
     })
 })
 
-app.get('/posts', (req, res) => {
-    db.query('SELECT * FROM posts', (err, result) => {
+app.get('/players', (req, res) => {
+    db.query('SELECT * FROM players', (err, result) => {
         if (err) {
             console.log(err)
         } else {
