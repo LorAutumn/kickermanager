@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { StateContext } from '../App'
-import SelectPlayerComponent from './selectPlayerComponent'
+import Axios from 'axios'
 
 function NewMatchComponent() {
     const stateContext = useContext(StateContext)
@@ -11,6 +11,10 @@ function NewMatchComponent() {
     const setMatchPlayers = stateContext.setMatchPlayers
     const matchDate = stateContext.matchDate
     const setMatchDate = stateContext.setMatchDate
+    const matchLocation = stateContext.matchLocation
+    const setMatchLocation = stateContext.setMatchLocation
+    const matchGoals = stateContext.matchGoals
+    const setMatchGoals = stateContext.setMatchGoals
 
     const updatePlayer = e => {
         const { name, value } = e.target
@@ -22,7 +26,39 @@ function NewMatchComponent() {
         ])
     }
 
+    const updateGoals = e => {
+        const { name, value } = e.target
+        setMatchGoals(prevState => [
+            {
+                ...prevState[0],
+                [name]: value,
+            },
+        ])
+    }
+
+    const addMatch = () => {
+        Axios.post('http://localhost:3001/addMatch', {
+            date: matchDate,
+            location: matchLocation,
+            mode: gameMode,
+            teamOneFront: matchPlayers[0].TeamOneFront,
+            teamOneBack: matchPlayers[0].TeamOneBack,
+            teamTwoFront: matchPlayers[0].TeamTwoFront,
+            teamTwoBack: matchPlayers[0].TeamTwoBack,
+            goalsRoundOneTOne: matchGoals[0].FirstRoundT1,
+            goalsRoundOneTTwo: matchGoals[0].FirstRoundT2,
+            goalsRoundTwoTOne: matchGoals[0].SecondRoundT1,
+            goalsRoundTwoTTwo: matchGoals[0].SecondRoundT2,
+        }).then(() => {
+            console.log('New Match added')
+        })
+    }
+
+    console.log(matchGoals)
+    console.log('t1Back', matchGoals[0].FirstRoundT1)
+    console.log('teamOneFront', matchPlayers[0].TeamOneFront)
     console.log(matchPlayers)
+    console.log(matchGoals[0].FirstRoundT2)
 
     return (
         <div className='new-match-wrapper'>
@@ -33,10 +69,20 @@ function NewMatchComponent() {
                     <label>date:</label>
                     <input
                         type='date'
-                        onChange={e => setMatchDate(e.target.value)}
+                        onChange={e => {
+                            setMatchDate(e.target.value)
+                        }}
                     />
                     <label>location:</label>
-                    <input type='text' />
+                    <select
+                        value={matchLocation}
+                        onChange={e => {
+                            setMatchLocation(e.target.value)
+                        }}>
+                        <option value='Wuerzburg'>Wuerzburg</option>
+                        <option value='Muenchen'>Muenchen</option>
+                        <option value='Berlin'>Berlin</option>
+                    </select>
                 </div>
                 <br />
                 <div>
@@ -102,17 +148,38 @@ function NewMatchComponent() {
                     <label>Results Round 1</label>
                     <br />
                     <label>Team 1:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='FirstRoundT1'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
                     <span>:</span>
                     <label>Team 2:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='FirstRoundT2'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
                     <br />
                     <label>Team 1:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='SecondRoundT1'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
                     <span>:</span>
                     <label>Team 2:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='SecondRoundT2'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
                 </div>
+                <button onClick={addMatch}>submit Match</button>
             </div>
         </div>
     )

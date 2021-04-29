@@ -12,12 +12,21 @@ function App() {
     const [playersList, setPlayersList] = useState([{ name: '', location: '' }])
     const [gameMode, setGameMode] = useState('One-Match')
     const [matchDate, setMatchDate] = useState()
+    const [matchLocation, setMatchLocation] = useState('')
     const [matchPlayers, setMatchPlayers] = useState([
         {
             TeamOneFront: '',
             TeamOneBack: '',
             TeamTwoFront: '',
             TeamTwoBack: '',
+        },
+    ])
+    const [matchGoals, setMatchGoals] = useState([
+        {
+            FirstRoundT1: 0,
+            FirstRoundT2: 0,
+            SecondRoundT1: 0,
+            SecondRoundT2: 0,
         },
     ])
 
@@ -34,6 +43,10 @@ function App() {
                         setMatchPlayers: setMatchPlayers,
                         matchDate: matchDate,
                         setMatchDate: setMatchDate,
+                        matchLocation: matchLocation,
+                        setMatchLocation: setMatchLocation,
+                        matchGoals: matchGoals,
+                        setMatchGoals: setMatchGoals,
                     }}>
                     <header className='App-header'>
                         <h1>Mayflower Kicker Manager</h1>
