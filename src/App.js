@@ -5,19 +5,32 @@ import HomeComponent from './components/homeComponent'
 import NewMatchComponent from './components/newMatchComponent'
 import PlayersComponent from './components/playersComponent'
 
-export const PlayersContext = createContext()
+export const StateContext = createContext()
 
 function App() {
     const [newMatch, startNewMatch] = useState(true)
     const [playersList, setPlayersList] = useState([{ name: '', location: '' }])
+    const [gameMode, setGameMode] = useState('One-Match')
+    const [matchPlayers, setMatchPlayers] = useState([
+        {
+            TeamOneFront: '',
+            TeamOneBack: '',
+            TeamTwoFront: '',
+            TeamTwoBack: '',
+        },
+    ])
 
     return (
         <div className='App'>
             <BrowserRouter>
-                <PlayersContext.Provider
+                <StateContext.Provider
                     value={{
                         playersList: playersList,
                         setPlayersList: setPlayersList,
+                        gameMode: gameMode,
+                        setGameMode: setGameMode,
+                        matchPlayers: matchPlayers,
+                        setMatchPlayers: setMatchPlayers,
                     }}>
                     <header className='App-header'>
                         <h1>Mayflower Kicker Manager</h1>
@@ -60,7 +73,7 @@ function App() {
                         </div>
                     </main>
                     <footer>footer</footer>
-                </PlayersContext.Provider>
+                </StateContext.Provider>
             </BrowserRouter>
         </div>
     )

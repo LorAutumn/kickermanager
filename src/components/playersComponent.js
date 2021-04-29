@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { PlayersContext } from '../App'
+import { StateContext } from '../App'
 import Axios from 'axios'
 
 function PlayersComponent() {
     const [newPlayerName, setNewPlayerName] = useState('')
     const [newPlayerLocation, setNewPlayerLocation] = useState('')
-    const playersContext = useContext(PlayersContext)
-    const playersList = playersContext.playersList
-    const setPlayersList = playersContext.setPlayersList
+    const stateContext = useContext(StateContext)
+    const playersList = stateContext.playersList
+    const setPlayersList = stateContext.setPlayersList
 
     console.log('name', newPlayerName, 'location', newPlayerLocation)
     console.log('list of players: ', playersList)
