@@ -20,7 +20,9 @@ function PlayersComponent() {
     }
 
     getPlayers()
-    useEffect(() => {}, [])
+    useEffect(() => {
+        getPlayers()
+    }, [])
 
     const addPlayer = () => {
         Axios.post('http://localhost:3001/addPlayer', {
