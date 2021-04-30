@@ -1,7 +1,7 @@
 import React from 'react'
 
 function HomeComponent() {
-    return <button>start new match</button>
+    return <div>Home</div>
 }
 
 export default HomeComponent

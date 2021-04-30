@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { StateContext } from '../App'
 import Axios from 'axios'
 
@@ -15,6 +15,11 @@ function NewMatchComponent() {
     const setMatchLocation = stateContext.setMatchLocation
     const matchGoals = stateContext.matchGoals
     const setMatchGoals = stateContext.setMatchGoals
+    const [matchesList, setMatchesList] = useState([])
+
+    useEffect(() => {
+        getMatches()
+    }, [])
 
     const updatePlayer = e => {
         const { name, value } = e.target
@@ -54,11 +59,12 @@ function NewMatchComponent() {
         })
     }
 
-    console.log(matchGoals)
-    console.log('t1Back', matchGoals[0].FirstRoundT1)
-    console.log('teamOneFront', matchPlayers[0].TeamOneFront)
-    console.log(matchPlayers)
-    console.log(matchGoals[0].FirstRoundT2)
+    const getMatches = () => {
+        Axios.get('http://localhost:3001/matches').then(response => {
+            console.log(response)
+            setMatchesList(response.data)
+        })
+    }
 
     return (
         <div className='new-match-wrapper'>
@@ -163,6 +169,8 @@ function NewMatchComponent() {
                         onChange={updateGoals}
                     />
                     <br />
+                    <label>Results Round 1</label>
+                    <br />
                     <label>Team 1:</label>
                     <input
                         name='SecondRoundT1'
@@ -179,7 +187,39 @@ function NewMatchComponent() {
                         onChange={updateGoals}
                     />
                 </div>
+                <br />
                 <button onClick={addMatch}>submit Match</button>
+            </div>
+
+            <div className='list-of-matches'>
+                {matchesList.map(match => {
+                    return (
+                        <ul key={match.id}>
+                            <li className='match-date'>
+                                Match Date: {match.date}
+                            </li>
+                            <li className='match-location'>
+                                Match Location: {match.location}
+                            </li>
+                            <li className='match-mode'>
+                                Match Mode: {match.mode}
+                            </li>
+                            <li className='match-team-one'>
+                                Team One - Front: {match.matchPlayersOneFront},
+                                Back: {match.matchPlayersOneFront}
+                            </li>
+                            <li className='match-team-two'>
+                                Team One - Front: {match.matchPlayersTwoFront},
+                                Back: {match.matchPlayersTwoBack}
+                            </li>
+                            <li className='match-results'>
+                                Round One: {match.matchGoalsRoundOneTeamOne} +
+                                {match.matchGoalsRoundOneTeamTwo}
+                                Round Two: {match.matchGoalsRoundTwoTeamOne}
+                            </li>
+                        </ul>
+                    )
+                })}
             </div>
         </div>
     )

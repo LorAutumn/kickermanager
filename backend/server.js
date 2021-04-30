@@ -76,6 +76,16 @@ app.get('/players', (req, res) => {
     })
 })
 
+app.get('/matches', (req, res) => {
+    db.query('SELECT * FROM matches', (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
+
 app.listen(3001, () => {
     console.log('Server is running on Port 3001')
 })
