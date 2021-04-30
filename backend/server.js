@@ -29,19 +29,55 @@ app.post('/addPlayer', (req, res) => {
     )
 })
 
-app.post('/upload', (req, res) => {
-    const image = req.body.image
-    db.query('INSERT INTO images (image) VALUES ?', [image], (err, result) => {
-        if (err) {
-            console.log(err)
-        } else {
-            res.send('image inserted')
+app.post('/addMatch', (req, res) => {
+    const date = req.body.date
+    const location = req.body.location
+    const mode = req.body.mode
+    const matchPlayersOneFront = req.body.teamOneFront
+    const matchPlayersOneBack = req.body.teamOneBack
+    const matchPlayersTwoFront = req.body.teamTwoFront
+    const matchPlayersTwoBack = req.body.teamTwoBack
+    const matchGoalsRoundOneTeamOne = req.body.goalsRoundOneTOne
+    const matchGoalsRoundOneTeamTwo = req.body.goalsRoundOneTTwo
+    const matchGoalsRoundTwoTeamOne = req.body.goalsRoundTwoTOne
+    const matchGoalsRoundTwoTeamTwo = req.body.goalsRoundTwoTTwo
+    db.query(
+        'INSERT INTO matches (date, location, mode, matchPlayersOneFront, matchPlayersOneBack, matchPlayersTwoFront, matchPlayersTwoBack, matchGoalsRoundOneTeamOne, matchGoalsRoundOneTeamTwo, matchGoalsRoundTwoTeamOne, matchGoalsRoundTwoTeamTwo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+            date,
+            location,
+            mode,
+            matchPlayersOneFront,
+            matchPlayersOneBack,
+            matchPlayersTwoFront,
+            matchPlayersTwoBack,
+            matchGoalsRoundOneTeamOne,
+            matchGoalsRoundOneTeamTwo,
+            matchGoalsRoundTwoTeamOne,
+            matchGoalsRoundTwoTeamTwo,
+        ],
+        (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send('match added')
+            }
         }
-    })
+    )
 })
 
 app.get('/players', (req, res) => {
     db.query('SELECT * FROM players', (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
+
+app.get('/matches', (req, res) => {
+    db.query('SELECT * FROM matches', (err, result) => {
         if (err) {
             console.log(err)
         } else {

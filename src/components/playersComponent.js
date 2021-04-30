@@ -12,16 +12,16 @@ function PlayersComponent() {
     console.log('name', newPlayerName, 'location', newPlayerLocation)
     console.log('list of players: ', playersList)
 
-    useEffect(() => {
-        getPlayers()
-    }, [])
-
     const getPlayers = () => {
         Axios.get('http://localhost:3001/players').then(response => {
             console.log(response)
             setPlayersList(response.data)
         })
     }
+
+    useEffect(() => {
+        getPlayers()
+    }, [])
 
     const addPlayer = () => {
         Axios.post('http://localhost:3001/addPlayer', {

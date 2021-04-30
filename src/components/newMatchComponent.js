@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { StateContext } from '../App'
-import SelectPlayerComponent from './selectPlayerComponent'
+import Axios from 'axios'
 
 function NewMatchComponent() {
     const stateContext = useContext(StateContext)
@@ -11,6 +11,15 @@ function NewMatchComponent() {
     const setMatchPlayers = stateContext.setMatchPlayers
     const matchDate = stateContext.matchDate
     const setMatchDate = stateContext.setMatchDate
+    const matchLocation = stateContext.matchLocation
+    const setMatchLocation = stateContext.setMatchLocation
+    const matchGoals = stateContext.matchGoals
+    const setMatchGoals = stateContext.setMatchGoals
+    const [matchesList, setMatchesList] = useState([])
+
+    useEffect(() => {
+        getMatches()
+    }, [])
 
     const updatePlayer = e => {
         const { name, value } = e.target
@@ -22,7 +31,40 @@ function NewMatchComponent() {
         ])
     }
 
-    console.log(matchPlayers)
+    const updateGoals = e => {
+        const { name, value } = e.target
+        setMatchGoals(prevState => [
+            {
+                ...prevState[0],
+                [name]: value,
+            },
+        ])
+    }
+
+    const addMatch = () => {
+        Axios.post('http://localhost:3001/addMatch', {
+            date: matchDate,
+            location: matchLocation,
+            mode: gameMode,
+            teamOneFront: matchPlayers[0].TeamOneFront,
+            teamOneBack: matchPlayers[0].TeamOneBack,
+            teamTwoFront: matchPlayers[0].TeamTwoFront,
+            teamTwoBack: matchPlayers[0].TeamTwoBack,
+            goalsRoundOneTOne: matchGoals[0].FirstRoundT1,
+            goalsRoundOneTTwo: matchGoals[0].FirstRoundT2,
+            goalsRoundTwoTOne: matchGoals[0].SecondRoundT1,
+            goalsRoundTwoTTwo: matchGoals[0].SecondRoundT2,
+        }).then(() => {
+            console.log('New Match added')
+        })
+    }
+
+    const getMatches = () => {
+        Axios.get('http://localhost:3001/matches').then(response => {
+            console.log(response)
+            setMatchesList(response.data)
+        })
+    }
 
     return (
         <div className='new-match-wrapper'>
@@ -33,10 +75,20 @@ function NewMatchComponent() {
                     <label>date:</label>
                     <input
                         type='date'
-                        onChange={e => setMatchDate(e.target.value)}
+                        onChange={e => {
+                            setMatchDate(e.target.value)
+                        }}
                     />
                     <label>location:</label>
-                    <input type='text' />
+                    <select
+                        value={matchLocation}
+                        onChange={e => {
+                            setMatchLocation(e.target.value)
+                        }}>
+                        <option value='Wuerzburg'>Wuerzburg</option>
+                        <option value='Muenchen'>Muenchen</option>
+                        <option value='Berlin'>Berlin</option>
+                    </select>
                 </div>
                 <br />
                 <div>
@@ -102,17 +154,72 @@ function NewMatchComponent() {
                     <label>Results Round 1</label>
                     <br />
                     <label>Team 1:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='FirstRoundT1'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
                     <span>:</span>
                     <label>Team 2:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='FirstRoundT2'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
+                    <br />
+                    <label>Results Round 1</label>
                     <br />
                     <label>Team 1:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='SecondRoundT1'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
                     <span>:</span>
                     <label>Team 2:</label>
-                    <input type='number' placeholder='0' />
+                    <input
+                        name='SecondRoundT2'
+                        type='number'
+                        placeholder='0'
+                        onChange={updateGoals}
+                    />
                 </div>
+                <br />
+                <button onClick={addMatch}>submit Match</button>
+            </div>
+
+            <div className='list-of-matches'>
+                {matchesList.map(match => {
+                    return (
+                        <ul key={match.id}>
+                            <li className='match-date'>
+                                Match Date: {match.date}
+                            </li>
+                            <li className='match-location'>
+                                Match Location: {match.location}
+                            </li>
+                            <li className='match-mode'>
+                                Match Mode: {match.mode}
+                            </li>
+                            <li className='match-team-one'>
+                                Team One - Front: {match.matchPlayersOneFront},
+                                Back: {match.matchPlayersOneFront}
+                            </li>
+                            <li className='match-team-two'>
+                                Team One - Front: {match.matchPlayersTwoFront},
+                                Back: {match.matchPlayersTwoBack}
+                            </li>
+                            <li className='match-results'>
+                                Round One: {match.matchGoalsRoundOneTeamOne} +
+                                {match.matchGoalsRoundOneTeamTwo}
+                                Round Two: {match.matchGoalsRoundTwoTeamOne}
+                            </li>
+                        </ul>
+                    )
+                })}
             </div>
         </div>
     )
