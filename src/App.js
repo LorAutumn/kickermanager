@@ -30,24 +30,25 @@ function App() {
         },
     ])
 
+    const stateCollection = {
+        playersList: playersList,
+        setPlayersList: setPlayersList,
+        gameMode: gameMode,
+        setGameMode: setGameMode,
+        matchPlayers: matchPlayers,
+        setMatchPlayers: setMatchPlayers,
+        matchDate: matchDate,
+        setMatchDate: setMatchDate,
+        matchLocation: matchLocation,
+        setMatchLocation: setMatchLocation,
+        matchGoals: matchGoals,
+        setMatchGoals: setMatchGoals,
+    }
+
     return (
         <div className='App'>
             <BrowserRouter>
-                <StateContext.Provider
-                    value={{
-                        playersList: playersList,
-                        setPlayersList: setPlayersList,
-                        gameMode: gameMode,
-                        setGameMode: setGameMode,
-                        matchPlayers: matchPlayers,
-                        setMatchPlayers: setMatchPlayers,
-                        matchDate: matchDate,
-                        setMatchDate: setMatchDate,
-                        matchLocation: matchLocation,
-                        setMatchLocation: setMatchLocation,
-                        matchGoals: matchGoals,
-                        setMatchGoals: setMatchGoals,
-                    }}>
+                <StateContext.Provider value={stateCollection}>
                     <header className='App-header'>
                         <h1>Kicker Manager</h1>
                         <nav>
