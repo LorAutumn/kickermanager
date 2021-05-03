@@ -19,7 +19,10 @@ function PlayersComponent() {
         })
     }
 
+<<<<<<< HEAD
     getPlayers()
+=======
+>>>>>>> master
     useEffect(() => {
         getPlayers()
     }, [])

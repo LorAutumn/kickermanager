@@ -49,7 +49,7 @@ function App() {
                         setMatchGoals: setMatchGoals,
                     }}>
                     <header className='App-header'>
-                        <h1>Mayflower Kicker Manager</h1>
+                        <h1>Kicker Manager</h1>
                         <nav>
                             <ul>
                                 <Link to='/'>
