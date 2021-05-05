@@ -82,12 +82,28 @@ main {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+.add-new-player-button:hover,
+.add-new-match-button:hover {
+  background-color: #9da39a;
+}
 
 .add-new-match-box select {
   background: #9da39a;
 }
 
-.add-new-player-button:hover {
+.cancel-add-new-match {
+  position: absolute;
+  right: 430px;
+  top: 170px;
+  border: #bbd1ea solid 1px;
+  border-radius: 5px;
+  color: white;
+  background-color: #54494bb0;
+  padding: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.cancel-add-new-match:hover {
   background-color: #9da39a;
 }
 
@@ -102,6 +118,11 @@ main {
   padding: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+.cancel-add-new-player:hover,
+.add-player-submit-button:hover,
+.submit-match-button:hover {
+  background-color: #9da39a;
 }
 
 .list-players-table {

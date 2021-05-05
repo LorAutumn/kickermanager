@@ -78,6 +78,11 @@ function NewMatchComponent() {
             {addNewMatch ? (
                 <div className='add-new-match-box'>
                     <h3>New Match</h3>
+                    <button
+                        className='cancel-add-new-match'
+                        onClick={() => setAddNewMatch(!addNewMatch)}>
+                        x
+                    </button>
                     <div className='encounter'>
                         <h2>Encounter:</h2>
                         <label>date:</label>

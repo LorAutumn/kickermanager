@@ -6,6 +6,10 @@
     padding: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #9da39a;
+    }
 }
 
 body {
@@ -90,9 +94,11 @@ main {
 .add-new-match-box select {
     background: #9da39a;
 }
-
-.add-new-player-button:hover {
-    background-color: #9da39a;
+.cancel-add-new-match {
+    position: absolute;
+    right: 430px;
+    top: 170px;
+    @include button-design();
 }
 
 .cancel-add-new-player,
