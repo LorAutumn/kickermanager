@@ -5,6 +5,7 @@ import Axios from 'axios'
 function PlayersComponent() {
     const [newPlayerName, setNewPlayerName] = useState('')
     const [newPlayerLocation, setNewPlayerLocation] = useState('')
+    const [addPlayerState, setAddPlayerState] = useState(false)
     const stateContext = useContext(StateContext)
     const playersList = stateContext.playersList
     const setPlayersList = stateContext.setPlayersList
@@ -29,26 +30,44 @@ function PlayersComponent() {
             location: newPlayerLocation,
         }).then(() => {
             console.log('New Player added')
+            setAddPlayerState(!addPlayerState)
             getPlayers()
         })
     }
 
     return (
         <div className='players-wrapper'>
-            <div className='add-new-player'>
-                <h3>add new Player:</h3>
-                <input
-                    type='text'
-                    placeholder='Player Name'
-                    onChange={e => setNewPlayerName(e.target.value)}
-                />
-                <input
-                    type='text'
-                    placeholder='Player Location'
-                    onChange={e => setNewPlayerLocation(e.target.value)}
-                />
-                <button onClick={() => addPlayer()}>add new Player</button>
-            </div>
+            <button
+                className='add-new-player-button'
+                onClick={() => setAddPlayerState(!addPlayerState)}>
+                add new Player
+            </button>
+            {addPlayerState ? (
+                <div className='add-new-player'>
+                    <h3>add new Player:</h3>
+                    <input
+                        type='text'
+                        placeholder='Player Name'
+                        onChange={e => setNewPlayerName(e.target.value)}
+                    />
+                    <input
+                        type='text'
+                        placeholder='Player Location'
+                        onChange={e => setNewPlayerLocation(e.target.value)}
+                    />
+                    <button
+                        className='add-player-submit-button'
+                        onClick={() => addPlayer()}>
+                        add Player
+                    </button>
+                    <button
+                        className='cancel-add-new-player'
+                        onClick={() => setAddPlayerState(!addPlayerState)}>
+                        x
+                    </button>
+                </div>
+            ) : null}
+
             <hr />
             <h3>List of Players:</h3>
             <div className='list-players'>

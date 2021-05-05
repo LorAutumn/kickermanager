@@ -1,3 +1,13 @@
+@mixin button-design() {
+    border: #bbd1ea solid 1px;
+    border-radius: 5px;
+    color: white;
+    background-color: #54494bb0;
+    padding: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 body {
     margin: 0;
     height: 100vh;
@@ -44,15 +54,51 @@ body {
 }
 
 main {
+    margin-top: 10px;
     height: 100vh;
     list-style-type: none;
     padding-bottom: 20px;
+}
+
+.add-new-player {
+    background-color: #54494b2d;
+    border-radius: 10px;
+    width: 35vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 15px;
+
+    h3 {
+        margin-block-start: 0px;
+    }
+    input {
+        background-color: #9da39a;
+        color: rgb(58, 57, 57);
+    }
+}
+
+.add-new-player-button {
+    position: absolute;
+    top: 128px;
+    right: 135px;
+    @include button-design();
+}
+.add-new-player-button:hover {
+    background-color: #9da39a;
+}
+
+.cancel-add-new-player,
+.add-player-submit-button {
+    margin-left: 4px;
+    @include button-design();
 }
 
 .list-players-table {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    border-spacing: 5px;
 }
 
 #list-players-table-first-row {
@@ -60,12 +106,9 @@ main {
     background-color: #54494b2d;
 }
 .list-players-row {
-    width: 100vw;
-    border: 1px solid black;
-
     th,
     td {
-        border: 1px solid black;
+        border: 0.2px solid black;
     }
 }
 
