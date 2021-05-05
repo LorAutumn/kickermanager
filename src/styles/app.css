@@ -48,7 +48,8 @@ main {
   padding-bottom: 20px;
 }
 
-.add-new-player {
+.add-new-player,
+.add-new-match-box {
   background-color: #54494b2d;
   border-radius: 10px;
   width: 35vw;
@@ -57,16 +58,19 @@ main {
   padding-top: 10px;
   padding-bottom: 15px;
 }
-.add-new-player h3 {
+.add-new-player h3,
+.add-new-match-box h3 {
   -webkit-margin-before: 0px;
           margin-block-start: 0px;
 }
-.add-new-player input {
+.add-new-player input,
+.add-new-match-box input {
   background-color: #9da39a;
   color: #3a3939;
 }
 
-.add-new-player-button {
+.add-new-player-button,
+.add-new-match-button {
   position: absolute;
   top: 128px;
   right: 135px;
@@ -79,12 +83,17 @@ main {
   transition: background-color 0.3s;
 }
 
+.add-new-match-box select {
+  background: #9da39a;
+}
+
 .add-new-player-button:hover {
   background-color: #9da39a;
 }
 
 .cancel-add-new-player,
-.add-player-submit-button {
+.add-player-submit-button,
+.submit-match-button {
   margin-left: 4px;
   border: #bbd1ea solid 1px;
   border-radius: 5px;

@@ -60,7 +60,8 @@ main {
     padding-bottom: 20px;
 }
 
-.add-new-player {
+.add-new-player,
+.add-new-match-box {
     background-color: #54494b2d;
     border-radius: 10px;
     width: 35vw;
@@ -78,18 +79,25 @@ main {
     }
 }
 
-.add-new-player-button {
+.add-new-player-button,
+.add-new-match-button {
     position: absolute;
     top: 128px;
     right: 135px;
     @include button-design();
 }
+
+.add-new-match-box select {
+    background: #9da39a;
+}
+
 .add-new-player-button:hover {
     background-color: #9da39a;
 }
 
 .cancel-add-new-player,
-.add-player-submit-button {
+.add-player-submit-button,
+.submit-match-button {
     margin-left: 4px;
     @include button-design();
 }
