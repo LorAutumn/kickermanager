@@ -52,6 +52,24 @@ function PlayersComponent() {
             <hr />
             <h3>List of Players:</h3>
             <div className='list-players'>
+                <table className='list-players-table'>
+                    <tr>
+                        <th id='list-players-table-first-row'>Name</th>
+                        <th id='list-players-table-first-row'>Location</th>
+                    </tr>
+                    {playersList.map(player => {
+                        return (
+                            <tr className='list-players-row' key={player.id}>
+                                <th className='player-name'>{player.name}</th>
+                                <th className='player-location'>
+                                    {player.location}
+                                </th>
+                            </tr>
+                        )
+                    })}
+                </table>
+            </div>
+            {/*<div className='list-players'>
                 {playersList.map(player => {
                     return (
                         <ul key={player.id}>
@@ -64,7 +82,7 @@ function PlayersComponent() {
                         </ul>
                     )
                 })}
-            </div>
+            </div> */}
         </div>
     )
 }
