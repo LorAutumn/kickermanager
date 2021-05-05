@@ -1,12 +1,13 @@
 body {
     margin: 0;
     height: 100vh;
+    font-size: 120%;
+    background-image: url('../images/soccer-field-307046_1280_50_transparency.png');
+    background-attachment: fixed;
 }
 
 .App {
     text-align: center;
-    background-image: url('../images/soccer-field-307046_1280_50_transparency.png');
-    background-attachment: fixed;
 }
 
 .App-header {
@@ -16,17 +17,16 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: calc(10px + 2vmin);
 
     h1 {
         margin-left: 40px;
-        position: relative;
         color: rgba(255, 255, 255, 0.692);
     }
 
     nav {
         color: white;
         margin-right: 40px;
+        margin-top: 15px;
         li {
             display: inline-block;
             margin-right: 15px;
@@ -46,6 +46,7 @@ body {
 main {
     height: 100vh;
     list-style-type: none;
+    padding-bottom: 20px;
 }
 
 .list-players .li {
@@ -59,4 +60,5 @@ footer {
     height: 20px;
     background-color: #54494b;
     opacity: 0.8;
+    position: fixed;
 }
