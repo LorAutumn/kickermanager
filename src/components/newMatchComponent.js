@@ -17,6 +17,8 @@ function NewMatchComponent() {
     const setMatchGoals = stateContext.setMatchGoals
     const [matchesList, setMatchesList] = useState([])
     const [addNewMatch, setAddNewMatch] = useState(false)
+    let dateString = 0
+    let date = null
 
     useEffect(() => {
         getMatches()
@@ -215,9 +217,42 @@ function NewMatchComponent() {
                 </div>
             ) : null}
             <div className='list-of-matches'>
+                {/*//TODO show data as table */}
+                <table className='list-matches-table'>
+                    <tr>
+                        <th id='list-matches-table-first-row'>Date</th>
+                        <th id='list-matches-table-first-row'>Location</th>
+                        <th id='list-matches-table-first-row'>Mode</th>
+                        <th id='list-matches-table-first-row'>Team 1</th>
+                        <th id='list-matches-table-first-row'>Team 2</th>
+                        <th id='list-matches-table-first-row'>Winner</th>
+                    </tr>
+                    {matchesList.map(match => {
+                        return (
+                            <tr className='list-match-row' id={match.id}>
+                                <th>{match.date.substr(0, 10)}</th>
+                                <th>{match.location}</th>
+                                <th>{match.mode}</th>
+                                <th>
+                                    {match.matchPlayersOneFront}
+                                    {' & '}
+                                    {match.matchPlayersOneBack}
+                                </th>
+                                <th>
+                                    {match.matchPlayersTwoFront}
+                                    {' & '}
+                                    {match.matchPlayersTwoBack}
+                                </th>
+                                <th>winner</th>
+                            </tr>
+                        )
+                    })}
+                </table>
+                {/*//TODO Show Match details on element click*/}
+                {/*
                 {matchesList.map(match => {
                     return (
-                        <ul key={match.id}>
+                        <ul className='match-list-item' key={match.id}>
                             <li className='match-date'>
                                 Match Date: {match.date}
                             </li>
@@ -243,6 +278,7 @@ function NewMatchComponent() {
                         </ul>
                     )
                 })}
+                */}
             </div>
         </div>
     )

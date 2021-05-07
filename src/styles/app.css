@@ -142,6 +142,35 @@ main {
   border: 0.2px solid black;
 }
 
+.list-matches-table {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 5px;
+}
+
+#list-matches-table-first-row {
+  font-size: 25px;
+  background-color: #54494b2d;
+}
+
+.match-list-item {
+  border: #bbd1ea solid 1px;
+  border-radius: 5px;
+  color: white;
+  background-color: #54494bb0;
+  padding: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-type: none;
+}
+.match-list-item:hover {
+  background-color: #9da39a;
+}
+
 footer {
   left: 0;
   bottom: 0;
