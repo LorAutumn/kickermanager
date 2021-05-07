@@ -41,8 +41,9 @@ app.post('/addMatch', (req, res) => {
     const matchGoalsRoundOneTeamTwo = req.body.goalsRoundOneTTwo
     const matchGoalsRoundTwoTeamOne = req.body.goalsRoundTwoTOne
     const matchGoalsRoundTwoTeamTwo = req.body.goalsRoundTwoTTwo
+    const winner = req.body.winner
     db.query(
-        'INSERT INTO matches (date, location, mode, matchPlayersOneFront, matchPlayersOneBack, matchPlayersTwoFront, matchPlayersTwoBack, matchGoalsRoundOneTeamOne, matchGoalsRoundOneTeamTwo, matchGoalsRoundTwoTeamOne, matchGoalsRoundTwoTeamTwo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO matches (date, location, mode, matchPlayersOneFront, matchPlayersOneBack, matchPlayersTwoFront, matchPlayersTwoBack, matchGoalsRoundOneTeamOne, matchGoalsRoundOneTeamTwo, matchGoalsRoundTwoTeamOne, matchGoalsRoundTwoTeamTwo, winner) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
             date,
             location,
@@ -55,6 +56,7 @@ app.post('/addMatch', (req, res) => {
             matchGoalsRoundOneTeamTwo,
             matchGoalsRoundTwoTeamOne,
             matchGoalsRoundTwoTeamTwo,
+            winner,
         ],
         (err, result) => {
             if (err) {

@@ -17,6 +17,9 @@ function NewMatchComponent() {
     const setMatchGoals = stateContext.setMatchGoals
     const [matchesList, setMatchesList] = useState([])
     const [addNewMatch, setAddNewMatch] = useState(false)
+    const [teamOne, setTeamOne] = useState(0)
+    const [teamTwo, setTeamTwo] = useState(0)
+    const [winner, setWinner] = useState('')
     let dateString = 0
     let date = null
 
@@ -44,7 +47,18 @@ function NewMatchComponent() {
         ])
     }
 
+    const calculateMatchWinner = () => {
+        if (matchGoals[0].FirstRoundT1 === 10) setTeamOne(prev => prev + 1)
+        else setTeamTwo(prev => prev + 1)
+        if (matchGoals[0].SecondRoundT1 === 10) setTeamOne(prev => prev + 1)
+        else setTeamTwo(prev => prev + 1)
+        if (teamOne === 2) setWinner('Team 1')
+        else setWinner('Team 2')
+    }
+    console.log('winner', winner)
+
     const addMatch = () => {
+        calculateMatchWinner()
         Axios.post('http://localhost:3001/addMatch', {
             date: matchDate,
             location: matchLocation,
@@ -57,8 +71,12 @@ function NewMatchComponent() {
             goalsRoundOneTTwo: matchGoals[0].FirstRoundT2,
             goalsRoundTwoTOne: matchGoals[0].SecondRoundT1,
             goalsRoundTwoTTwo: matchGoals[0].SecondRoundT2,
+            winner: winner,
         }).then(() => {
             console.log('New Match added')
+            setTeamOne(0)
+            setTeamTwo(0)
+            setWinner('')
         })
     }
 
@@ -243,7 +261,7 @@ function NewMatchComponent() {
                                     {' & '}
                                     {match.matchPlayersTwoBack}
                                 </th>
-                                <th>winner</th>
+                                <th>{match.winner}</th>
                             </tr>
                         )
                     })}
