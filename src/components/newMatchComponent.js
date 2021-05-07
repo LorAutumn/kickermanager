@@ -73,7 +73,8 @@ function NewMatchComponent() {
             goalsRoundTwoTTwo: matchGoals[0].SecondRoundT2,
             winner: winner,
         }).then(() => {
-            console.log('New Match added')
+            setAddNewMatch(!addNewMatch)
+            getMatches()
             setTeamOne(0)
             setTeamTwo(0)
             setWinner('')
@@ -235,7 +236,6 @@ function NewMatchComponent() {
                 </div>
             ) : null}
             <div className='list-of-matches'>
-                {/*//TODO show data as table */}
                 <table className='list-matches-table'>
                     <tr>
                         <th id='list-matches-table-first-row'>Date</th>
