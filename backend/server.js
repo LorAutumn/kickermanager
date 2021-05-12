@@ -88,6 +88,17 @@ app.get('/matches', (req, res) => {
     })
 })
 
+app.post('/deleteMatch', (req, res) => {
+    const matchId = req.body.matchId
+    db.query('DELETE FROM matches WHERE id = ?', [matchId], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send('match deleted')
+        }
+    })
+})
+
 app.listen(3001, () => {
     console.log('Server is running on Port 3001')
 })

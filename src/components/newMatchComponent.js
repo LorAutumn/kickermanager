@@ -81,6 +81,14 @@ function NewMatchComponent() {
         })
     }
 
+    const deleteMatch = id => {
+        Axios.post('http://localhost:3001/deleteMatch', {
+            matchId: id,
+        }).then(() => {
+            getMatches()
+        })
+    }
+
     const getMatches = () => {
         Axios.get('http://localhost:3001/matches').then(response => {
             console.log(response)
@@ -262,6 +270,12 @@ function NewMatchComponent() {
                                     {match.matchPlayersTwoBack}
                                 </th>
                                 <th>{match.winner}</th>
+                                <th>
+                                    <button
+                                        onClick={() => deleteMatch(match.id)}>
+                                        delete match
+                                    </button>
+                                </th>
                             </tr>
                         )
                     })}
